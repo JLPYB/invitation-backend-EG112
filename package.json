@@ -1,0 +1,26 @@
+{
+  "name": "invitation-backend-EG112",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.28.2",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "docxtemplater": "^3.67.6",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "nodemailer": "^7.0.13",
+    "pizzip": "^3.2.0",
+    "resend": "^6.9.1",
+    "uuid": "^13.0.0"
+  }
+}
