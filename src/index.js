@@ -11,7 +11,11 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "*", // for now — later we’ll lock it down
+  }),
+);
 app.use(express.json());
 
 // Health check
@@ -33,8 +37,8 @@ app.post("/send-invitation", async (req, res) => {
     // 3 — send email with Resend
     const result = await sendResendEmailWithPdf(
       email,
-      `Your Invitation from EuroGames112 | Albi, France`,
-      `<p>Hello ${Title} ${name},</p><p>Here is your invitation for EuroGames112.</p>`,
+      `Your Invitation for EuroGames112 | Albi, France`,
+      `<p>Dear ${Title} ${name},</p><p>Thank you for your interest in EuroGames112.</p><p>Please find attached your personalized invitation PDF, generated based on the information you provided in the form.</p><p>EuroGames112 brings together police officers, firefighters, and first responders from across Europe through sport, community, and shared values. We are pleased to welcome you to this unique initiative.</p><p>If you have any questions or need further information, feel free to contact us.</p><p>We look forward to your participation.</p><p>Kind regards,</p><p>The EuroGames112 Team</p>`,
       pdfBuffer,
     );
 
