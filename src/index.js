@@ -5,8 +5,9 @@ import { generateDocx } from "./services/docxService.js";
 import fs from "fs";
 import { convertDocxToPdf } from "./services/pdfService.js";
 import { sendResendEmailWithPdf } from "./services/resendEmailService.js";
+import rateLimit from "express-rate-limit";
 
-dotenv.config();
+dotenv.config(); //load enviroment first
 
 const app = express();
 
@@ -23,7 +24,19 @@ app.get("/", (req, res) => {
   res.json({ status: "Backend is running 🚀" });
 });
 
-// Test Endpoint
+// ----------------------------
+// Rate Limiter
+// ----------------------------
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 5, // limit each IP to 5 requests per window
+  message: { error: "Too many requests, please try again later" },
+});
+// Apply only to /send-invitation
+app.use("/send-invitation", limiter);
+
+//  Endpoint
 app.post("/send-invitation", async (req, res) => {
   try {
     const { Title, name, organization, date, email } = req.body;
