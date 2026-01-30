@@ -17,8 +17,7 @@ export function convertDocxToPdf(docxBuffer) {
 
     fs.writeFileSync(docxPath, docxBuffer);
 
-    const libreOfficePath =
-      "/Applications/LibreOffice.app/Contents/MacOS/soffice";
+    const libreOfficePath = "libreoffice";
 
     const command = `"${libreOfficePath}" --headless --convert-to pdf "${docxPath}" --outdir "${tmpDir}"`;
 
